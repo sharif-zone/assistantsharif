@@ -3,400 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharif Chatbot</title>
+    <title>Claymorphism Design</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --clay-bg: #e0e5ec;
+            --clay-shadow-light: #ffffff;
+            --clay-shadow-dark: #a3b1c6;
+            --primary: #6d5dfc;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #f1f1f1 0%, #c6c6c6 100%);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .chat-container {
-            width: 350px;
-            height: 550px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .chat-header {
-            background: #333333;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .bot-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #fff;
-            display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            font-weight: bold;
-            color: #4a6fa5;
-        }
-        
-        .chat-messages {
-            flex: 1;
             padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 12px 15px;
-            border-radius: 18px;
-            line-height: 1.4;
-        }
-        
-        .user-message {
-            background: #e1f5fe;
-            color: #0277bd;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .bot-message {
-            /*background: #f1f1f1;*/
             color: #333;
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
         }
-        
-        .chat-input-container {
-            padding: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-        }
-        
-        .chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-            font-size: 14px;
+
+        /* Claymorphism Card */
+        .clay-card {
+            background: var(--clay-bg);
+            border-radius: 22px;
+            padding: 30px;
+            max-width: 400px;
+            box-shadow: 
+                9px 9px 16px rgba(163, 177, 198, 0.6),
+                -9px -9px 16px rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
             transition: all 0.3s ease;
-            position: relative;
-            /* Normal state - sunk appearance */
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #f8f8f8;
         }
 
-        .chat-input:hover {
-            /* Hover state - float up appearance */
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            background-color: #ffffff;
-            border-color: #111111;
+        .clay-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                12px 12px 20px rgba(163, 177, 198, 0.7),
+                -12px -12px 20px rgba(255, 255, 255, 0.9);
         }
 
-        .chat-input:focus {
-            /* Focus state - maintain float appearance */
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            background-color: #ffffff;
-            border-color: #111111;
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
         }
-        
-        .send-button {
-            background: #111111;
-            color: white;
+
+        .card-content {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Claymorphism Buttons */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .clay-button {
+            background: var(--clay-bg);
             border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            margin-left: 10px;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+            box-shadow: 
+                6px 6px 12px rgba(163, 177, 198, 0.8),
+                -6px -6px 12px rgba(255, 255, 255, 0.9);
+        }
+
+        .clay-button:hover {
+            color: var(--primary);
+            box-shadow: 
+                inset 3px 3px 7px rgba(163, 177, 198, 0.8),
+                inset -3px -3px 7px rgba(255, 255, 255, 0.9);
+        }
+
+        .clay-button:active {
+            box-shadow: 
+                inset 4px 4px 8px rgba(163, 177, 198, 0.9),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+        }
+
+        .primary-btn {
+            color: var(--primary);
+        }
+
+        .secondary-btn {
+            color: var(--secondary);
+        }
+
+        .accent-btn {
+            color: var(--accent);
+        }
+
+        /* Claymorphism Icon */
+        .clay-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--clay-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s;
+            margin: 0 auto 20px;
+            box-shadow: 
+                6px 6px 12px rgba(163, 177, 198, 0.8),
+                -6px -6px 12px rgba(255, 255, 255, 0.9);
         }
-        .send-button {
-   background: #5555555;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    margin-left: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
 
-.send-button:hover {
-    background: #111111;
-}
+        .clay-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--primary);
+        }
 
-.send-button:active {
-    transform: scale(0.85);
-}
-        
-        /*.send-button:hover {*/
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .button-container {
+                flex-direction: column;
+                width: 100%;
+            }
             
-        /*}*/
-        
-        .typing-indicator {
-            display: none;
-            align-self: flex-start;
-            margin-bottom: 15px;
-            padding: 12px 15px;
-            border-radius: 18px;
-            /*background: #f1f1f1;*/
-            border-bottom-left-radius: 5px;
-            max-width: 80%;
-            position: relative;
-        }
-        
-        .typing-indicator::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -10px;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 10px solid #f1f1f1;
-        }
-        
-        .typing-indicator span {
-            height: 10px;
-            width: 10px;
-            background: #999;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 2px;
-            animation: typing 1.9s infinite;
-        }
-        
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.8s;
-        }
-        
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 1.8s;
-        }
-        
-        @keyframes typing {
-            0%, 60%, 100% {
-                transform: translateY(0);
+            .clay-button {
+                width: 100%;
             }
-            30% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        /* Animation for vanishing the initial message */
-        .initial-message {
-            transition: all 0.5s ease;
-        }
-        
-        .vanish {
-            opacity: 0;
-            transform: translateY(-20px);
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <div class="bot-avatar">S</div>
-            <h2>Sharif Assistant</h2>
+    <div class="clay-card">
+        <div class="clay-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+            </svg>
         </div>
-        
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot-message initial-message" id="initialMessage">
-                Hello! I'm Sharif's assistant.You can call me Sharif,you or tumi.
-            </div>
-        </div>
-        
-        <div class="typing-indicator" id="typingIndicator">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        
-        <div class="chat-input-container">
-            <input 
-                type="text" 
-                class="chat-input" 
-                id="chatInput" 
-                placeholder="Ask anything about Sharif"
-                autocomplete="off"
-            >
-            <button class="send-button" id="sendButton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-            </button>
+        <h2 class="card-title">Claymorphism Design</h2>
+        <p class="card-content">
+          Go to the next story to view the source code.
+        </p>
+        <div class="button-container">
+            <button class="clay-button primary-btn">Three</button>
+            <button class="clay-button secondary-btn">Two</button>
+            <button class="clay-button accent-btn">On-line</button>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatMessages = document.getElementById('chatMessages');
-            const chatInput = document.getElementById('chatInput');
-            const sendButton = document.getElementById('sendButton');
-            const typingIndicator = document.getElementById('typingIndicator');
-            const initialMessage = document.getElementById('initialMessage');
-            
-            // Predefined questions and answers about Sharif
-            const qaPairs = [
-                {
-                    keywords: ["name", "who", "???", "????? ??? ??"],
-                    answer: "My name is Sharif. I'm glad to meet you!"
-                },
-                 {
-                    keywords: ["name", "hi", "???", "????? ??? ??"],
-                    answer: "My name is Sharif. I'm glad to meet you!"
-                },
-                {
-                    keywords: ["occupation", "job", "work", "????", "?? ????"],
-                    answer: "I work as a software developer. I love creating innovative solutions."
-                },
-                 {
-                    keywords: ["occupation", "class", "work", "????", "kon class e poro ???? ??? ?????? ????? ?? ????"],
-                    answer: "??? ??? ?????? ??????? ????? ? ?????"
-                },
-                {
-                    keywords: ["location", "live", "where", "?????", "?????"],
-                    answer: "I live in Dhaka, Bangladesh. It's a vibrant city with lots of opportunities."
-                },
-                {
-                    keywords: ["hobbies", "interest", "??", "?????"],
-                    answer: "I enjoy coding, reading tech blogs, and playing cricket in my free time."
-                },
-                {
-                    keywords: ["education", "study", "???????", "??????"],
-                    answer: "I have a degree in Computer Science from the University of Dhaka."
-                },
-                {
-                    keywords: ["contact", "email", "reach", "???????", "?????"],
-                    answer: "You can contact me at sharif@example.com. I'd love to hear from you!"
-                },
-                {
-                    keywords: ["experience", "work history", "????????", "????? ????????"],
-                    answer: "I have 1 years of experience in web development, specializing in JavaScript frameworks."
-                },
-                {
-                    keywords: ["skills", "expertise", "??????", "????"],
-                    answer: "My main skills include JavaScript, React, Node.js, and Python. I'm also good at problem-solving."
-                },
-                {
-                    keywords: ["projects", "portfolio", "????????", "???"],
-                    answer: "I've worked on various web applications and mobile apps. You can view my portfolio at sharif-portfolio.com."
-                },
-                {
-                    keywords: ["favorite", "like", "?????", "???? ????"],
-                    answer: "My favorite programming language is JavaScript because of its versatility and large community."
-                }
-            ];
-            
-            // Function to add a message to the chat
-            function addMessage(message, isUser = false) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message');
-                messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
-                messageElement.textContent = message;
-                chatMessages.appendChild(messageElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            // Function to show typing indicator
-            function showTypingIndicator() {
-                // Move typing indicator to the chat messages container
-                chatMessages.appendChild(typingIndicator);
-                typingIndicator.style.display = 'flex';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            // Function to hide typing indicator
-            function hideTypingIndicator() {
-                typingIndicator.style.display = 'none';
-            }
-            
-            // Function to get bot response based on user input
-            function getBotResponse(userMessage) {
-                const lowerCaseMessage = userMessage.toLowerCase();
-                
-                // Check for matching keywords
-                for (const pair of qaPairs) {
-                    for (const keyword of pair.keywords) {
-                        if (lowerCaseMessage.includes(keyword.toLowerCase())) {
-                            return pair.answer;
-                        }
-                    }
-                }
-                
-                // Default response if no keywords match
-                return "I'm not sure how to answer that. You can ask me about Sharif's name, occupation, location, hobbies, education, contact, experience, skills, projects, or favorites.";
-            }
-            
-            // Function to handle sending a message
-            function sendMessage() {
-                const message = chatInput.value.trim();
-                if (message === '') return;
-                
-                // Add user message
-                addMessage(message, true);
-                chatInput.value = '';
-                
-                // If this is the first message, make the initial message vanish
-                if (initialMessage && !initialMessage.classList.contains('vanish')) {
-                    initialMessage.classList.add('vanish');
-                    
-                    // Remove the initial message after the animation completes
-                    setTimeout(() => {
-                        initialMessage.remove();
-                    }, 500); // Match the transition duration
-                }
-                
-                // Show typing indicator
-                showTypingIndicator();
-                
-                // Simulate bot thinking and then respond
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    const botResponse = getBotResponse(message);
-                    addMessage(botResponse);
-                }, 1000);
-            }
-            
-            // Event listeners
-            sendButton.addEventListener('click', sendMessage);
-            
-            chatInput.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
